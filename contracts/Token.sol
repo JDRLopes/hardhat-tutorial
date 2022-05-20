@@ -1,6 +1,8 @@
 //SPDX-License-Identifier: UNLICENSED
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.14;
+
+import "hardhat/console.sol";
 
 contract Token {
 
@@ -17,6 +19,9 @@ contract Token {
     }
 
     function transfer (address _receiver, uint256 _amount) external {
+        console.log("Sender balance is %s tokens", balances[msg.sender]);
+        console.log("Trying to send %s tokens to %s", _amount, _receiver);
+
         require(balances[msg.sender] >= _amount && balances[_receiver] + _amount >= balances[_receiver], "Not enough tokens");
         balances[msg.sender] -= _amount;
         balances[_receiver] += _amount;
